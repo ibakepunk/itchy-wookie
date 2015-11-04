@@ -1,8 +1,7 @@
 from subprocess import check_call, CalledProcessError
 
-import sys
-
 from args_parser import parser
+
 
 class FirewallConfigurer:
     def __init__(self, firewall_binary):
@@ -26,11 +25,11 @@ class IptablesConfigurer(FirewallConfigurer):
         for chunk in chunks(ports, self.MAX_PORTS):
             try:
                 check_call([self.firewall_binary,
-                      '-A', 'INPUT',
-                      '-p', 'tcp',
-                      '-m', 'multiport',
-                      '--dports', str(chunk)[1:-1],
-                      '-j', 'ACCEPT'])
+                            '-A', 'INPUT',
+                            '-p', 'tcp',
+                            '-m', 'multiport',
+                            '--dports', str(chunk)[1:-1],
+                            '-j', 'ACCEPT'])
             except CalledProcessError as e:
                 print e
                 exit(e.returncode)
@@ -39,11 +38,11 @@ class IptablesConfigurer(FirewallConfigurer):
         for chunk in chunks(ports, self.MAX_PORTS):
             try:
                 check_call([self.firewall_binary,
-                      '-A', 'INPUT',
-                      '-p', 'tcp',
-                      '-m', 'multiport',
-                      '--dports', str(chunk)[1:-1],
-                      '-j', 'DROP'])
+                            '-A', 'INPUT',
+                            '-p', 'tcp',
+                            '-m', 'multiport',
+                            '--dports', str(chunk)[1:-1],
+                            '-j', 'DROP'])
             except CalledProcessError as e:
                 print e
                 exit(e.returncode)
@@ -54,6 +53,7 @@ class IptablesConfigurer(FirewallConfigurer):
         except CalledProcessError as e:
             print e
             exit(e.returncode)
+
 
 class FirewalldConfigurer(FirewallConfigurer):
     pass
