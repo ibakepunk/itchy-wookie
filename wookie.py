@@ -65,5 +65,11 @@ def chunks(iterable, chunk_size):
 
 
 if __name__ == '__main__':
-    c = IptablesConfigurer(firewall_binary='asd')
-    c.open_ports([22,80,666])
+    args = parser.parse_args()
+    c = IptablesConfigurer(firewall_binary='/sbin/iptables')
+    if args.action == 'clear':
+        c.clear_rules()
+    elif args.action == 'open':
+        c.open_ports(args.ports)
+    elif args.action == 'close':
+        c.close_ports(args.ports)
