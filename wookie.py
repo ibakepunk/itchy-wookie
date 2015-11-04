@@ -18,7 +18,7 @@ class IptablesConfigurer(FirewallConfigurer):
         print 'ports input: ', str(ports)
         for chunk in chunks(ports, self.MAX_PORTS):
             print 'chunk: ', str(chunk)
-            sh.iptables(A='INPUT', p='tcp', m='multiport', dports=str(chunk)[1:-1])
+            sh.iptables(A='INPUT', p='tcp', m='multiport', dports=str(chunk)[1:-1], j='ACCEPT')
 
 class FirewalldConfigurer(FirewallConfigurer):
     pass
