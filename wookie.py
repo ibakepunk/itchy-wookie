@@ -26,3 +26,8 @@ class FirewalldConfigurer(FirewallConfigurer):
 def chunks(iterable, chunk_size):
     for i in xrange(0, len(iterable), chunk_size):
         yield iterable[i:i + chunk_size]
+
+
+if __name__ == '__main__':
+    c = IptablesConfigurer(firewall_binary='asd')
+    c.open_ports([22,80,666])
