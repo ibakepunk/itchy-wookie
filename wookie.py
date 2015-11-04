@@ -20,7 +20,6 @@ class FirewallConfigurer:
 class IptablesConfigurer(FirewallConfigurer):
     MAX_PORTS = 15
 
-    # iptables -A INPUT -p tcp -m multiport --dports "22,443,80,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16" -j ACCEPT
     def open_ports(self, ports):
         for chunk in chunks(ports, self.MAX_PORTS):
             try:
